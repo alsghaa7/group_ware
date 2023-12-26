@@ -7,3 +7,8 @@
 <meta charset='UTF-8'>
 	<title>MAIN</title>
 </head>
+<body>
+
+	<h1 class="main-title">@ MAIN @</h1>
+
+</body>
