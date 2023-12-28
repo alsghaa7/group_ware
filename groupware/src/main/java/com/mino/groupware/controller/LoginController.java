@@ -31,6 +31,12 @@ public class LoginController {
 		this.userService = userService;
 	}
 	
+	@RequestMapping(value = "/returnMain.do")
+	public String returnMain(Model model) {
+		logger.info("main.jsp return");
+		return "main";
+	}
+	
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, String> loginProc(Model model, @RequestBody Map<String, String> userInfo) {

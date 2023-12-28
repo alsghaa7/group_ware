@@ -34,7 +34,12 @@
 			, contentType: 'application/json'
 			, success: function(event) {
 				console.log(event);
-				if (event.result === 'fail') alert('존재하지 않는 회원입니다.');
+				if (event.result === 'fail') {
+					alert('존재하지 않는 회원입니다.');
+					location.reload();
+				} else {
+					location.href = "returnMain.do"
+					 }
 			}
 		});
 	};
@@ -44,7 +49,9 @@
 	.groupware-section-login { text-align: center; width: 600px; margin: 0 auto; margin-top: 150px; }
 	.groupware-login-thumb { width: 200px; }
 	.groupware-login-field { margin: 0 auto; width: 400px; }
-	.groupware-login-field input, button { width: 100%; padding: 10px; margin: 10px 0px; }
+	.groupware-login-field input { width: 100%; padding: 10px; margin: 10px 0px; }
+	.groupware-login-field button { display: inline-block; 	width: 50%; padding: 10px; margin: 10px 0px; }
+	
 </style>
 <body>
 	<section class="groupware-section-login">
@@ -56,6 +63,7 @@
 			<input class="user_id" type='text' name='user_id' placeholder="아이디를 입력하세요.">
 			<input class="user_pswd" type='password' name='user_pswd' placeholder="비밀번호를 입력하세요.">
 			<button class="groupware-login-btn" type="button">로그인</button>
+			<button class="groupware-signup-btn" type="button">회원가입</button>
 		</div>
 	</section>
 </body>
