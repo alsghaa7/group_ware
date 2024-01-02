@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.mino.groupware.controller.LoginController;
 import com.mino.groupware.mapper.UserMapper;
 import com.mino.groupware.service.UserService;
+import com.mino.groupware.vo.UserInfo;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -44,4 +45,10 @@ public class UserServiceImpl implements UserService {
 		return userMapper.loginChk(userInfo);
 	}
 	
+	public int signUp(UserInfo userSignUp) {
+		
+		logger.info("[ userService signUp ]: {}", userSignUp);
+		return userMapper.signUp(userSignUp);
+		
+	}
 }

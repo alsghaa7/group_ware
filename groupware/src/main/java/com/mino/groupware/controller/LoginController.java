@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mino.groupware.service.UserService;
+import com.mino.groupware.vo.UserInfo;
 
 @Controller
 public class LoginController {
@@ -35,6 +36,12 @@ public class LoginController {
 	public String returnMain(Model model) {
 		logger.info("main.jsp return");
 		return "main";
+	}
+	
+	@RequestMapping(value="/returnSignUp.do")
+	public String returnSignUp(Model model) {
+		logger.info("signUp.jsp return");
+		return "signUp";
 	}
 	
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
@@ -60,4 +67,13 @@ public class LoginController {
 		
 		return result;
 	}
+	
+	@RequestMapping(value="/signup.do", method = RequestMethod.POST)
+	public int signUpProc(UserInfo userSignUp) {
+		int temp = userService.signUp(userSignUp);
+		
+		logger.info("[ signUp temp ] ={}", temp);
+		return temp;
+	}
+
 }

@@ -19,6 +19,7 @@
 				'user_pswd': document.querySelector('.user_pswd').value
 			}
 			
+			
 			getUsers(userInfo);
 		});
 	}
@@ -63,7 +64,7 @@
 			<input class="user_id" type='text' name='user_id' placeholder="아이디를 입력하세요.">
 			<input class="user_pswd" type='password' name='user_pswd' placeholder="비밀번호를 입력하세요.">
 			<button class="groupware-login-btn" type="button">로그인</button>
-			<button class="groupware-signup-btn" type="button">회원가입</button>
+			<button class="groupware-signup-btn" type="button" onClick="location.href='returnSignUp.do'">회원가입</button>
 		</div>
 	</section>
 </body>
