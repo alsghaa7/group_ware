@@ -31,6 +31,7 @@
                     },
                     success: function (data) {
                         // 서버로부터의 응답 처리 (예: 성공 메시지 표시)
+                        var temp = data;
                         if(temp!=0){
                         alert("회원가입이 완료되었습니다!");
                         location.href="returnMain.do";
