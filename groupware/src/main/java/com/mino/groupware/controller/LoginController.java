@@ -68,7 +68,7 @@ public class LoginController {
 		return result;
 	}
 	
-	@RequestMapping(value="/signup.do", method = RequestMethod.POST)
+	@RequestMapping(value="/signup.do", method = RequestMethod.GET)
 	public int signUpProc(UserInfo userSignUp) {
 		int temp = userService.signUp(userSignUp);
 		
