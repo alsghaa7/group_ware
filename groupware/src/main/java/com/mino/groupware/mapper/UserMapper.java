@@ -18,4 +18,6 @@ public interface UserMapper {
 	public String loginChk(Map<String, String> userInfo);
 	
 	public int signUp(UserInfo userSignUp);
+	
+	public int save(UserInfo userSave);
 }

@@ -68,12 +68,13 @@ public class LoginController {
 		return result;
 	}
 	
-	@RequestMapping(value="/signup.do", method = RequestMethod.GET)
-	public int signUpProc(UserInfo userSignUp) {
-		int temp = userService.signUp(userSignUp);
+	@RequestMapping(value="/signup.do", method = RequestMethod.POST)
+	@ResponseBody
+	public int signUpProc(@RequestBody UserInfo userSave) {
 		
-		logger.info("[ signUp temp ] ={}", temp);
-		return temp;
+		int userKey = userService.save(userSave);
+		logger.info("[ signUp temp ] ={}", userKey);
+		return userKey;
 	}
 
 }

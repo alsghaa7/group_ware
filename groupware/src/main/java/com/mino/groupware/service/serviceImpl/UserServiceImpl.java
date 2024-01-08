@@ -51,4 +51,9 @@ public class UserServiceImpl implements UserService {
 		return userMapper.signUp(userSignUp);
 		
 	}
+	
+	public int save(UserInfo userSave) {
+		
+		return userMapper.save(userSave);
+	}
 }

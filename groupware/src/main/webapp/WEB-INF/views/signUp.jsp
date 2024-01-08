@@ -31,30 +31,35 @@
         			user_num : $('#user_num').val()
         		}
         		
-        		signUp(signUpInfo);
-        		});
+       		signUp(signUpInfo);
+       		});
         	
         	
         	function signUp(signUpInfo) {
         		console.log('::: signup 호출 :::');
         		
         		$.ajax({
-        			type: 'GET1',
+        			type: 'POST',
         			url: '/signup.do',
         			data: JSON.stringify(signUpInfo),
-        			success: function(event) {
-        				console.log(enent);
-        				if (event.temp == 4) {
+        			dataType: 'json',
+        			contentType: 'application/json',
+        			success: function(userKey) {
+        				if (userKey == 1) {
         					alert('가입 완료');
-        					location.href('/returnMain.do');
+        					location.href = "returnMain.do";
         				} else {
         					alert(' 실패  ');
-        					location.href('/returnMain.do');
-        					}
+        					window.location.reload();
         				}
-        			});
-        		};
+        			},
+        			 error: function(error) {
+        				alert(' 실패  ');
+       					window.location.reload();
+       				}
+        		});
         	}
+        }
     </script>
 
 </body>

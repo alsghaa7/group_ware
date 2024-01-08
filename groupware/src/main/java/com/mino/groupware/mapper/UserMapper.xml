@@ -18,11 +18,11 @@
 			AND USER_PSWD = #{user_pswd}
 	</select>
 	
-	<insert id="signUp" parameterType="com.mino.groupware.vo.UserInfo">
+	<insert id="save" parameterType="com.mino.groupware.vo.UserInfo">
 		INSERT INTO
 			USER (user_id, user_name, user_num, user_pswd)
 		VALUE
-			(#{user_id}, #{user_name}, #{user_num}, #user_pswd})
+			(#{user_id}, #{user_name}, #{user_num}, #{user_pswd})
 	</insert>
 	
   </mapper>
