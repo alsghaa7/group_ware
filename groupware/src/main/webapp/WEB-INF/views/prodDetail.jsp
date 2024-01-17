@@ -18,7 +18,7 @@
 
 <!-- 		<button class="prodUpdate" type="button"> 수 정 </button>
 			<button class="prodDelete" type="button"> 삭 제 </button> -->
-		<button calss="basket" type="button"> 장바구니 </button>
+		<button class="basket" type="button"> 장바구니 </button>
 	</form>
 	
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
