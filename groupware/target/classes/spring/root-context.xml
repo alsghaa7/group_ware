@@ -41,17 +41,17 @@
 	    <constructor-arg ref="userMapper"/>
 	</bean>
 	
-	<!-- UserMapper 빈 생성 -->
-	<bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
-		<property name="mapperInterface" value="com.mino.groupware.mapper.UserMapper" />
-		<property name="sqlSessionFactory" ref="sqlSessionFactory" /> <!-- 생성된 마이바티스 빈 주입 -->
-	</bean>
-	
 	<bean id="prodService" class="com.mino.groupware.service.serviceImpl.ProdServiceImpl">
 		<!--UserMapper 생선된 빈 주입 -->
 	    <constructor-arg ref="prodMapper"/>
 	</bean>
 	
+	<!-- UserMapper 빈 생성 -->
+	<bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="mapperInterface" value="com.mino.groupware.mapper.UserMapper" />
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" /> <!-- 생성된 마이바티스 빈 주입 -->
+	</bean>
+
 	<bean id="prodMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="mapperInterface" value="com.mino.groupware.mapper.ProdMapper" />
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" /> <!-- 생성된 마이바티스 빈 주입 -->
