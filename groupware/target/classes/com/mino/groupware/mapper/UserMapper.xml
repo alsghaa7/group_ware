@@ -25,4 +25,9 @@
 			(#{user_id}, #{user_name}, #{user_pswd}, #{user_email}, #{user_tel}, #{user_address1}, #{user_address2}, #{user_gender})
 	</insert>
 	
+	<select id="getLoginUserByLoginId" parameterType="String" resultType="com.mino.groupware.vo.UserInfo">
+	
+		SELECT * FROM USER WHERE user_id = #{user_id}
+	
+	</select>
   </mapper>

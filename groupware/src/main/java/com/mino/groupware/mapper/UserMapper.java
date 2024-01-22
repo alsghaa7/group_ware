@@ -20,4 +20,6 @@ public interface UserMapper {
 	public int signUp(UserInfo userSignUp);
 	
 	public int save(UserInfo userSave);
+	
+	public UserInfo getLoginUserByLoginId(String user_id);
 }

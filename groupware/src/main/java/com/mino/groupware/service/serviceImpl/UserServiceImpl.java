@@ -56,4 +56,9 @@ public class UserServiceImpl implements UserService {
 		
 		return userMapper.save(userSave);
 	}
+	
+	public UserInfo getLoginUserByLoginId(String user_id) {
+		
+		return userMapper.getLoginUserByLoginId(user_id);
+	}
 }

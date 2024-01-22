@@ -1,8 +1,10 @@
 package com.mino.groupware.util;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,6 +17,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.mino.groupware.service.UserService;
+import com.mino.groupware.vo.UserInfo;
 
 import lombok.RequiredArgsConstructor;
 
@@ -25,8 +28,8 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 	private final String secretKey;
 	
 	@Override
-	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) {
-		String authorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
+	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException{
+		String authorizationHeader = request.getHeader("AUTHORIZATION");
 		
 		if(authorizationHeader == null) {
 			filterChain.doFilter(request, response);
@@ -49,14 +52,12 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 		
 		
 		/* 서비스에 아이디로 유저정보 받아오는 인스턴스 작성 필요 */
-		  User loginUser = userService.getLoginUserByLoginId(user_id);
+		  UserInfo loginUser = userService.getLoginUserByLoginId(user_id);
 		  
-		  UsernamePasswordAuthenticationToken authenticationToken = new
-		  UsernamePasswordAuthenticationToken( loginUser.getLoginId(), null,
-		  List.of(new SimpleGrantedAuthority(loginUser.getRole().name())));
+		  UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+				  loginUser.getUser_id(), null, List.of(new SimpleGrantedAuthority(loginUser.getUser_admin())));
 		  authenticationToken.setDetails(new
 		  WebAuthenticationDetailsSource().buildDetails(request));
-		 
 		
 		SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 		filterChain.doFilter(request, response);

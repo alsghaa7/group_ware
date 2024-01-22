@@ -6,8 +6,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.mino.groupware.service.UserService;
+import com.mino.groupware.vo.UserRole;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,13 +22,13 @@ public class SecurityConfig{
 	private static String secretKey = "aaaa";
 	
 	@Bean
-	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) {
+	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 		return httpSecurity
 				.httpBasic().disable()
 				.csrf().disable()
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 				.and()
-		/*		.addFilterBefore(new JwtTokenFilter(userService, secretKey), UsernamePassworkAuthenticationFilter.class)*/
+				.addFilterBefore(new JwtTokenFilter(userService, secretKey), UsernamePasswordAuthenticationFilter.class)
 				.authorizeRequests()
 				.antMatchers("").authenticated()
 				.antMatchers("").hasAuthority(UserRole.ADMIN.name())

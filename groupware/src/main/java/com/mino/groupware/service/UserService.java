@@ -6,9 +6,9 @@ import java.util.Map;
 import com.mino.groupware.vo.UserInfo;
 
 public interface UserService {
+	
 	public String userCheck(Map<String, String> userInfo);
 	
-
 	/* public List<Map<String, String>> getUserList(); */
 	public String loginChk(Map<String, String> userInfo);
 	
@@ -16,4 +16,5 @@ public interface UserService {
 		
 	public int save(UserInfo userSave);
 
+	public UserInfo getLoginUserByLoginId(String user_id);
 }
