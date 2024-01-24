@@ -50,7 +50,7 @@
         		
         		$.ajax({
         			type: 'POST',
-        			url: '/signup.do',
+        			url: '/sign.do',
         			data: JSON.stringify(signUpInfo),
         			dataType: 'json',
         			contentType: 'application/json',

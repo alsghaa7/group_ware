@@ -25,9 +25,16 @@
 			(#{user_id}, #{user_name}, #{user_pswd}, #{user_email}, #{user_tel}, #{user_address1}, #{user_address2}, #{user_gender})
 	</insert>
 	
-	<select id="getLoginUserByLoginId" parameterType="String" resultType="com.mino.groupware.vo.UserInfo">
+	<select id="getLoginUserByLoginId" parameterType="String" resultType="HashMap">
 	
-		SELECT * FROM USER WHERE user_id = #{user_id}
+		SELECT * FROM user WHERE user_id=#{user_id}
 	
 	</select>
+	
+	<update id="updateToken" parameterType="String">
+	
+		UPDATE SET USER token = #{token} WHERE user_id = #{user_id}
+		}
+	
+	</update>
   </mapper>

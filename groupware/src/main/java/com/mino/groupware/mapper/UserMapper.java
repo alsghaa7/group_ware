@@ -1,6 +1,7 @@
 package com.mino.groupware.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 import com.mino.groupware.vo.UserInfo;
@@ -14,12 +15,12 @@ public interface UserMapper {
 	//@Select("select * from user") 
 	public List<Map<String, String>> getUserList();
 	
-	//로그인 정보에 맞는 유저정보 select
-	public String loginChk(Map<String, String> userInfo);
-	
+	//안씀
 	public int signUp(UserInfo userSignUp);
 	
 	public int save(UserInfo userSave);
 	
-	public UserInfo getLoginUserByLoginId(String user_id);
+	public Map<String, String> getLoginUserByLoginId(@Param("user_id") String user_id);
+	
+	public String updateToken(String token, String user_id);
 }
