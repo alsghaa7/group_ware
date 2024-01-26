@@ -46,6 +46,10 @@
 	    <constructor-arg ref="prodMapper"/>
 	</bean>
 	
+	<bean id="JwtUtil" class="com.mino.groupware.jwt.JwtUtil">
+		<constructor-arg ref="userMapper"/>
+	</bean>
+	
 	<!-- UserMapper 빈 생성 -->
 	<bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="mapperInterface" value="com.mino.groupware.mapper.UserMapper" />
