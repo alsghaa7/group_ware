@@ -24,5 +24,12 @@
 		VALUE
 			(#{user_id}, #{user_name}, #{user_pswd}, #{user_email}, #{user_tel}, #{user_address1}, #{user_address2}, #{user_gender})
 	</insert>
+	
+	<select id="loadUserByUsername" resultType="HashMap">
+	
+		SELECT * FROM USER WHERE user_name = #{user_name}
+			
+	
+	</select>
 
   </mapper>

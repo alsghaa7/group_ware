@@ -6,10 +6,12 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.mino.groupware.controller.LoginController;
+import com.mino.groupware.jwt.JwtUtil;
 import com.mino.groupware.mapper.UserMapper;
 import com.mino.groupware.service.UserService;
 
@@ -19,13 +21,12 @@ import com.mino.groupware.vo.UserInfo;
 public class UserServiceImpl implements UserService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
-	
-	@Autowired
+
 	private final UserMapper userMapper;
 	
 	@Autowired
 	public UserServiceImpl(UserMapper userMapper) {
-		// TODO Auto-generated constructor stub
+
 		this.userMapper = userMapper;
 	}
 	
@@ -59,6 +60,4 @@ public class UserServiceImpl implements UserService {
 		
 		return userMapper.save(userSave);
 	}
-
-	
 }

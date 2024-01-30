@@ -22,5 +22,5 @@ public interface UserMapper {
 	
 	public String loginChk(Map<String, String> userInfo);
 	
-	public User findByUserName(String user_name);
+	public User loadUserByUsername(String user_name);
 }
