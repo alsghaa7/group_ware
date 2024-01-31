@@ -38,16 +38,17 @@
 	<!-- UserService 빈 생성 -->
 	<bean id="userService" class="com.mino.groupware.service.serviceImpl.UserServiceImpl">
 		<!--UserMapper 생선된 빈 주입 -->
-	    <constructor-arg ref="userMapper"/>
+		<constructor-arg ref="userMapper"/>
+	</bean>
+	
+	<bean id="userDetailsService" class="com.mino.groupware.jwt.UserDetailsServiceImpl">
+		<!--UserMapper 생선된 빈 주입 -->
+		<constructor-arg ref="userMapper"/>
 	</bean>
 	
 	<bean id="prodService" class="com.mino.groupware.service.serviceImpl.ProdServiceImpl">
 		<!--UserMapper 생선된 빈 주입 -->
-	    <constructor-arg ref="prodMapper"/>
-	</bean>
-	
-	<bean id="JwtUtil" class="com.mino.groupware.jwt.JwtUtil">
-		<constructor-arg ref="userMapper"/>
+		<constructor-arg ref="prodMapper"/>
 	</bean>
 	
 	<!-- UserMapper 빈 생성 -->
@@ -60,5 +61,8 @@
 		<property name="mapperInterface" value="com.mino.groupware.mapper.ProdMapper" />
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" /> <!-- 생성된 마이바티스 빈 주입 -->
 	</bean>
-
+	
+	<bean id="jwtTokenProvider" class="com.mino.groupware.jwt.JwtTokenProvider">
+		<constructor-arg ref="userDetailsService"/> 
+	</bean>
 </beans>

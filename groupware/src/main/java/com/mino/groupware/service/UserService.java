@@ -1,10 +1,6 @@
 package com.mino.groupware.service;
 
-import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletResponse;
-
 import com.mino.groupware.vo.UserInfo;
 
 public interface UserService {
