@@ -23,4 +23,6 @@ public interface UserMapper {
 	public String loginChk(Map<String, String> userInfo);
 	
 	public User findByUsername(String user_name);
+	
+	public void tokenUpdate(String token, String user_name);
 }

@@ -41,12 +41,7 @@ public class JwtController {
     	logger.info("## token ## : {} ", token);
     	
     	SecurityContextHolder.getContext().setAuthentication(authentication);
-    	try {
     	
-    		token = jwtTokenProvider.generateToken(authentication);
-    	} catch (Exception e) {
-    		throw new Exception("JWT_CONTROLLER_EXCEPTION");
-    	}
     	return token;
     }
 }
