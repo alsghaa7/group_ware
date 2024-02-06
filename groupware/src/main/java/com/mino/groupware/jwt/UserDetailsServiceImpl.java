@@ -31,5 +31,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 .roles(user.getRoles())
                 .build();
 	}
-
+	
+	public void tokenUpdate(String token, String user_name) {
+		userMapper.tokenUpdate(token, user_name);
+	}
+	
 }

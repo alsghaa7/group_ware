@@ -7,41 +7,52 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mino.groupware.jwt.JwtTokenProvider;
+import com.mino.groupware.service.UserService;
 
 @Controller
 public class JwtController {
 
-	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+	private static final Logger logger = LoggerFactory.getLogger(JwtController.class);
 	
 	@Autowired
 	private final JwtTokenProvider jwtTokenProvider;
+	@Autowired
+	private final UserService userService;
 	
-	public JwtController(JwtTokenProvider jwtTokenProvider) {
+	public JwtController(JwtTokenProvider jwtTokenProvider, UserService userService) {
 		this.jwtTokenProvider = jwtTokenProvider;
+		this.userService = userService;
 	}
 	
     @RequestMapping(value = "/auth", method = RequestMethod.POST)
     public String jwtTemp(@RequestBody Map<String, String> user) throws Exception {
     	
-    	String test = jwtTokenProvider.temptemp();
-    	
-    	logger.info(" && temptemp && : {}", test);
     	logger.info("@@ JwtController @@ : {}", user);
     	
-    	Authentication authentication = new UsernamePasswordAuthenticationToken(user.get("userName"), user.get("password"));
-    	logger.info("$$ temp $$ : {}", authentication);
-    	String token = jwtTokenProvider.generateToken(authentication);
-    	logger.info("## token ## : {} ", token);
+    	String loginChk = userService.loginChk(user);
     	
-    	SecurityContextHolder.getContext().setAuthentication(authentication);
+    	logger.info("## loginChk ## : {}", loginChk);
+    	if(StringUtils.hasText(loginChk)) {
+    		Authentication authentication = new UsernamePasswordAuthenticationToken(user.get("userName"), user.get("password"));
+
+        	String token = jwtTokenProvider.generateToken(authentication);
+        	logger.info("## token ## : {} ", token);
+        	
+        	SecurityContextHolder.getContext().setAuthentication(authentication);
+        	
+        	return token;
+    	} else {
+    		return null;
+    	}
     	
-    	return token;
     }
 }

@@ -23,7 +23,7 @@ import io.jsonwebtoken.security.Keys;
 @Component
 public class JwtTokenProvider {
 	
-	private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
+	private static final Logger logger = LoggerFactory.getLogger(JwtTokenProvider.class);
 	
 	private final String secret = "minoAFWERsbufeawFEASWfbueswfdsakj125613lFEASW";
 	private final long validTime = 1000 * 60 * 60;
@@ -71,8 +71,5 @@ public class JwtTokenProvider {
 		Date expirationDate = Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody().getExpiration();
 		return expirationDate.before(new Date());
 	}
-	
-	public String temptemp() {
-		return "temptemp";
-	}
+
 }

@@ -25,4 +25,5 @@ public interface UserMapper {
 	public User findByUsername(String user_name);
 	
 	public void tokenUpdate(String token, String user_name);
+
 }
