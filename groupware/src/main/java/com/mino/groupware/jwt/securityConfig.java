@@ -8,9 +8,15 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 public class securityConfig extends WebSecurityConfigurerAdapter {
+	
+	@Bean
+	public JwtFilter jwtFilter() {
+		return new JwtFilter();
+	}
 
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
@@ -28,10 +34,13 @@ public class securityConfig extends WebSecurityConfigurerAdapter {
 		return authenticationConfiguration.getAuthenticationManager();
 	}
 
-	@Bean
-
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests().antMatchers("/auth").permitAll().anyRequest().authenticated();
+		http.csrf().disable()
+		.authorizeHttpRequests().antMatchers("").permitAll()
+		.anyRequest().authenticated()
+		.and()
+		
+		.apply(new JwtConfig(jwtFilter()));
 	}
 }

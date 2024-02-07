@@ -60,4 +60,8 @@
 	<bean id="jwtTokenProvider" class="com.mino.groupware.jwt.JwtTokenProvider">
 		<constructor-arg ref="userService"/> 
 	</bean>
+	
+	<bean id="JwtFilter" class="com.mino.groupware.jwt.JwtFilter"/>
+	
+
 </beans>

@@ -50,12 +50,14 @@ public class JwtTokenProvider {
 		String authorities = authentication.getAuthorities().stream()
 				.map(auth -> auth.getAuthority())
 				.collect(Collectors.joining(","));
+		
+		logger.info("@@ Provider @@ : {}", authorities);
 		long now = new Date().getTime();
 		Date valid = new Date(now + validTime);
 		
 		return Jwts.builder()
 				.setSubject(authentication.getName())
-				.claim("user_admin", authorities)
+				.claim("user_admin", "ADMIN")
 				.signWith(secret, SignatureAlgorithm.HS256)
 				.setExpiration(valid)
 				.compact();
