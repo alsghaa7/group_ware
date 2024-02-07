@@ -31,9 +31,15 @@
 			
 	</select>
 	
-	<update id="tokenUpdate" parameterType="String">
+	<update id="tokenUpdate">
 	
-		update user set token = #{token} where user_name = #{user_name}
+		update user set token = #{token} where user_name = #{user_id}
+	
+	</update>
+	
+	<update id="tokenDelete">
+	
+		update user set token = null where token = #{token}
 	
 	</update>
 

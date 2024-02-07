@@ -41,11 +41,6 @@
 		<constructor-arg ref="userMapper"/>
 	</bean>
 	
-	<bean id="userDetailsService" class="com.mino.groupware.jwt.UserDetailsServiceImpl">
-		<!--UserMapper 생선된 빈 주입 -->
-		<constructor-arg ref="userMapper"/>
-	</bean>
-	
 	<bean id="prodService" class="com.mino.groupware.service.serviceImpl.ProdServiceImpl">
 		<!--UserMapper 생선된 빈 주입 -->
 		<constructor-arg ref="prodMapper"/>
@@ -63,6 +58,6 @@
 	</bean>
 	
 	<bean id="jwtTokenProvider" class="com.mino.groupware.jwt.JwtTokenProvider">
-		<constructor-arg ref="userDetailsService"/> 
+		<constructor-arg ref="userService"/> 
 	</bean>
 </beans>

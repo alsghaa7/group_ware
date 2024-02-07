@@ -1,5 +1,6 @@
 package com.mino.groupware.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -22,37 +23,42 @@ import com.mino.groupware.service.UserService;
 public class JwtController {
 
 	private static final Logger logger = LoggerFactory.getLogger(JwtController.class);
-	
+
 	@Autowired
 	private final JwtTokenProvider jwtTokenProvider;
 	@Autowired
 	private final UserService userService;
-	
+
 	public JwtController(JwtTokenProvider jwtTokenProvider, UserService userService) {
 		this.jwtTokenProvider = jwtTokenProvider;
 		this.userService = userService;
 	}
-	
-    @RequestMapping(value = "/auth", method = RequestMethod.POST)
-    public String jwtTemp(@RequestBody Map<String, String> user) throws Exception {
-    	
-    	logger.info("@@ JwtController @@ : {}", user);
-    	
-    	String loginChk = userService.loginChk(user);
-    	
-    	logger.info("## loginChk ## : {}", loginChk);
-    	if(StringUtils.hasText(loginChk)) {
-    		Authentication authentication = new UsernamePasswordAuthenticationToken(user.get("userName"), user.get("password"));
 
-        	String token = jwtTokenProvider.generateToken(authentication);
-        	logger.info("## token ## : {} ", token);
-        	
-        	SecurityContextHolder.getContext().setAuthentication(authentication);
-        	
-        	return token;
-    	} else {
-    		return null;
-    	}
-    	
-    }
+	@RequestMapping(value = "/auth", method = RequestMethod.POST)
+	public String jwtTemp(@RequestBody Map<String, String> user) throws Exception {
+
+		logger.info("@@ JwtController @@ : {}", user);
+		
+		Map<String, String> updateInfo = new HashMap<String, String>();
+		String loginChk = userService.loginChk(user);
+
+		logger.info("## loginChk ## : {}", loginChk);
+		if (StringUtils.hasText(loginChk)) {
+			Authentication authentication = new UsernamePasswordAuthenticationToken(user.get("user_id"),user.get("user_pswd"));
+
+			String token = jwtTokenProvider.generateToken(authentication);
+			logger.info("## token ## : {} ", token);
+			updateInfo.put("token", token);
+			updateInfo.put("user_id", user.get("user_id"));
+			userService.tokenUpdate(updateInfo);
+
+			SecurityContextHolder.getContext().setAuthentication(authentication);
+
+			return token;
+		} else {
+			return null;
+		}
+
+	}
+	
 }

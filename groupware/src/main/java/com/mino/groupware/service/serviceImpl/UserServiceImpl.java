@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import com.mino.groupware.controller.LoginController;
 import com.mino.groupware.mapper.UserMapper;
 import com.mino.groupware.service.UserService;
-
+import com.mino.groupware.vo.User;
 import com.mino.groupware.vo.UserInfo;
 
 @Service
@@ -56,5 +56,27 @@ public class UserServiceImpl implements UserService {
 	public int save(UserInfo userSave) {
 		
 		return userMapper.save(userSave);
+	}
+
+	@Override
+	public void tokenUpdate(Map<String, String> updateInfo) {
+		
+		logger.info("@@ Service tokenUpdate@@ : {}", updateInfo);
+		userMapper.tokenUpdate(updateInfo);
+		
+	}
+
+	@Override
+	public Map<String, String> findByUsername(String user_name) {
+
+		return userMapper.findByUsername(user_name);
+	}
+
+	@Override
+	public void tokenDelete(Map<String, String> deleteInfo) {
+		
+		logger.info("@@ Service tokenDelete @@ : {}", deleteInfo);
+		userMapper.tokenDelete(deleteInfo);
+		
 	}
 }
